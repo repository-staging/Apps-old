@@ -54,7 +54,9 @@ class AppsListAdapter(private val onItemClick: (packageName: String) -> Unit) :
                         val sizeInfo = "${status.downloadedSize.toMB()} MB out of " +
                                 "${status.downloadSize.toMB()} MB," +
                                 "  ${status.downloadedPercent} %"
-                        hideDownloadProgress = false
+                        hideDownloadProgress = status.downloadedPercent >= 100 ||
+                                status.downloadedPercent < 0
+                        shouldShowInstalling = hideDownloadProgress && status.completed
 
                         install.text = App.getString(R.string.downloading)
                         downloadProgress.setProgressCompat(status.downloadedPercent, false)
