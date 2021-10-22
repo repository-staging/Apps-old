@@ -56,13 +56,14 @@ class ApkDownloadHelper constructor(private val context: Context) {
 
                     completeProgress[fileName] = newProgress
                     completeProgress.forEach { (_, progress) ->
+                        calculationSize++
                         read += progress.read
                         total += progress.total
                         completed = completed && progress.taskCompleted
-                        calculationSize++
                     }
 
-                    val doneInPercent = if (calculationSize == size && total.toInt() != 0) (read * 100.0) / total else -1.0
+                    val shouldCompute = calculationSize == size && total.toInt() != 0
+                    val doneInPercent = if (shouldCompute) (read * 100.0) / total else -1.0
 
                     progressListener.invoke(
                         read,
