@@ -12,7 +12,7 @@ sealed class InstallStatus(
     }
 
     data class Installable(
-        val latestVersion: Long
+        val latestVersion: Long,
         val isClicked: Boolean = false
     ) : InstallStatus("", latestV = latestVersion.toString())
 
