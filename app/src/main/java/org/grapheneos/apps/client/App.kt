@@ -335,6 +335,7 @@ class App : Application() {
                 refreshScope.cancel()
                 callback.invoke(MetadataCallBack.SecurityError(Exception(
                     App.getString(R.string.refreshInProgress))))
+                return
             }
             packagesInfo.isNotEmpty() && !force -> return
             isDownloading -> {
